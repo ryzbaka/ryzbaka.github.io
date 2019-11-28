@@ -6,6 +6,9 @@
     margin-right:25%;
     background-color:black;
   }
+  body{
+      background-color:black;
+  }
   .name{
     color:white;
     font-family:monospace;
