@@ -13,10 +13,12 @@ body{
 .name{
   color:white;
   font-family:monospace;
+  font-size: 30px;
 }
 .name:hover{
   color:hotpink;
   font-family:'Comic Sans MS';
+  font-size:27px;
 }
 .navbar{
   display:flex;

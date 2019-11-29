@@ -8,7 +8,7 @@
   <body>
     <div class="drawing">
       <script src="sketch.js"></script>
-      <h1 class="name">Hamza Ali Rizvi</h1>
+      <h1 class="name" onmouseover="changeName('RYZBAKA')" onmouseout="changeNameBack('Hamza Ali Rizvi')">Hamza Ali Rizvi</h1>
     </div>
     <div class="navbar">
       <p class="about navbar-item">About</p>
@@ -27,6 +27,14 @@
         githubButton.addEventListener("click", () => {
           window.open("https://github.com/ryzbaka", "_blank");
         });
+        function changeName(someString) {
+          const name = document.querySelector(".name");
+          name.innerText = someString;
+        }
+        function changeNameBack(someString) {
+          const name = document.querySelector(".name");
+          name.innerText = someString;
+        }
       </script>
     </div>
   </body>
