@@ -1,10 +1,9 @@
-
 <html>
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
     <div class="drawing">
@@ -12,8 +11,23 @@
       <h1 class="name">Hamza Ali Rizvi</h1>
     </div>
     <div class="navbar">
-    <p class="about navbar-item">About</p>
-    <p class="projects navbar-item">Projects</p>
+      <p class="about navbar-item">About</p>
+      <p class="projects navbar-item">Projects</p>
+      <p class="linkedin navbar-item">Linkedin</p>
+      <p class="github navbar-item">Github</p>
+      <script>
+        const linkedinButton = document.querySelector(".linkedin");
+        linkedinButton.addEventListener("click", () => {
+          window.open(
+            "https://www.linkedin.com/in/hamza-ali-rizvi-643251148/",
+            "_blank"
+          );
+        });
+        const githubButton = document.querySelector(".github");
+        githubButton.addEventListener("click", () => {
+          window.open("https://github.com/ryzbaka", "_blank");
+        });
+      </script>
     </div>
   </body>
 </html>
