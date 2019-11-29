@@ -75,5 +75,4 @@ function setup() {
       }
       ellipse(100+i,300-i,size-i,size-i)
     }
-    
   }
