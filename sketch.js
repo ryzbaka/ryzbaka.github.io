@@ -4,9 +4,9 @@ function setup() {
   } 
   
   function draw() { 
-    let r=map(mouseY,0,400,0,255)
-    let b=map(mouseX,0,400,0,255)
-    background(r,0,b);
+  const mappedX=map(mouseX,0,400,0,255)
+  const mappedY=map(mouseY,0,400,0,255)
+  background(mappedX,mappedY,mappedX-mappedY+100)
     let size=100
     const circles=100
     const separation=3
