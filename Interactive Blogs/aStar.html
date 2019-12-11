@@ -1,23 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>A*</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.sound.min.js"></script>
     <script src="aStar.js"></script>
-</head>
-<body>
-    <button class="next-button">Next</button>
-    <script>
-        const nextButton=document.querySelector('.next-button')
-        nextButton.addEventListener('click',()=>{
-            lmao()
-        })
-    </script>
-
-</body>
+  </head>
+  <body>
+    <div>
+      <h2 class="status">A* Algorithm</h2>
+    </div>
+    <div class="node-selection">
+      <input
+        type="number"
+        class="start-id"
+        placeholder="Starting Node ID"
+        min="0"
+        max="99"
+      />
+      <input
+        type="number"
+        class="goal-id"
+        placeholder="Goal Node ID"
+        min="0"
+        max="99"
+      />
+      <button class="confirm-button">Confirm</button>
+    </div>
+    <div class="buttons">
+      <button class="next-button control-button" disabled="true">Next</button>
+      <button class="next-five-button control-button" disabled="true">
+        Next 5 Steps
+      </button>
+      <button class="reset control-button" disabled="true">Reset</button>
+      <script>
+        const confirmButton = document.querySelector(".confirm-button");
+        confirmButton.addEventListener("click", () => {
+          confirmButton.setAttribute("disabled", true);
+          const sId = document.querySelector(".start-id");
+          const gId = document.querySelector(".goal-id");
+          startid = sId.value;
+          goalid = gId.value;
+          const controlButtons = document.querySelectorAll(".control-button");
+          for(let i=0;i<controlButtons.length;i++){
+              controlButtons[i].removeAttribute("disabled")
+          }
+        });
+      </script>
+      <script>
+        const nextButton = document.querySelector(".next-button");
+        nextButton.addEventListener("click", () => {
+          restrictedDraw();
+        });
+        const nextFiveButton = document.querySelector(".next-five-button");
+        nextFiveButton.addEventListener("click", () => {
+          for (let i = 0; i < 5; i++) {
+            restrictedDraw();
+          }
+        });
+        const resetButton = document.querySelector(".reset");
+        resetButton.addEventListener("click", () => {
+          resetNodes();
+        });
+      </script>
+    </div>
+  </body>
 </html>
