@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>A*</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.sound.min.js"></script>
+    <script src="aStar.js"></script>
+  </head>
+  <body>
+    <div>
+      <h2 class="status">A* Algorithm</h2>
+    </div>
+    <div class="node-selection">
+      <input
+        type="number"
+        class="start-id"
+        placeholder="Starting Node ID"
+        min="0"
+        max="99"
+      />
+      <input
+        type="number"
+        class="goal-id"
+        placeholder="Goal Node ID"
+        min="0"
+        max="99"
+      />
+      <button class="confirm-button">Confirm</button>
+    </div>
+    <div class="buttons">
+      <button type="button" class="next-button control-button" disabled>
+        Next
+      </button>
+      <button type="button" class="next-five-button control-button" disabled>
+        Next 5 Steps
+      </button>
+      <button type="button" class="reset control-button" disabled>Reset</button>
+      <script>
+        //
+        const confirmButton = document.querySelector(".confirm-button");
+        confirmButton.addEventListener("click", () => {
+          confirmButton.setAttribute("disabled", "true");
+          const controlButtons = document.querySelectorAll(".control-button");
+          controlButtons.forEach((element, index) => {
+            element.removeAttribute("disabled");
+          });
+
+          startid = parseInt(document.querySelector(".start-id").value);
+          goalid = parseInt(document.querySelector(".goal-id").value);
+          console.log(`Start ID: ${startid}`)
+          console.log(`Goal ID: ${goalid}`)
+          for(let i=0;i<10;i++){
+              for(let j=0;j<10;j++){
+                  if(nodes[i][j].id===startid){
+                    nodes[i][j].isStart=true
+                    currentX=i
+                    currentY=j
+                    updateColor(nodes[i][j])
+                  }
+                  if(nodes[i][j].id===goalid){
+                    nodes[i][j].isGoal=true
+                    updateColor(nodes[i][j])
+                  }
+                }
+            }
+            console.log(`Current X: ${currentX}`)
+            console.log(`Current Y: ${currentY}`)
+            drawNodes()
+        }); //This function will update startid and goalid to the values in the inputs
+        //It will then assign update isGoal and isStart to true for the nodes with
+        //mathching respective ids. Then the currentX and currentY values will be updated to the start
+        //node's index values
+        //
+        const nextButton = document.querySelector(".next-button");
+        nextButton.addEventListener("click", () => {
+          restrictedDraw();
+        });
+        const nextFiveButton = document.querySelector(".next-five-button");
+        nextFiveButton.addEventListener("click", () => {
+          for (let i = 0; i < 5; i++) {
+            restrictedDraw();
+          }
+        });
+        const resetButton = document.querySelector(".reset");
+        resetButton.addEventListener("click", () => {
+          resetNodes();
+        });
+      </script>
+    </div>
+  </body>
+</html>
