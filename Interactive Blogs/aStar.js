@@ -1,10 +1,8 @@
-let currentX=0
-let currentY=0
+let currentX
+let currentY
 let pathQueue=[]
 let startid
 let goalid
-let startX
-let startY
 let goalX
 let goalY
 class Node{
@@ -66,7 +64,10 @@ function updateColor(someNode){
         someNode.color="lightgrey"
     }
     if(someNode.isGoal){
-        someNode.color="golden"
+        someNode.color="yellow"
+    }
+    if(someNode.isStart){
+        someNode.color="darkblue"
     }
 }
 function drawNodes(){
@@ -94,6 +95,8 @@ function resetNodes(){
     drawNodes()
 }
 function restrictedDraw() {
+    console.log(startid)
+    console.log(goalid)
     //write code here to start with start node
     //add to path
     //calculate f value of all neighbours
