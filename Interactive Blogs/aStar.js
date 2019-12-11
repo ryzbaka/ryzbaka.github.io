@@ -82,7 +82,7 @@ function drawNodes(){
     }
 }
 function resetNodes(){
-    currentX=0
+    /*currentX=0
     currentY=0
     pathQueue=[]
     for(let i=0;i<10;i++){
@@ -91,7 +91,8 @@ function resetNodes(){
             nodes[i][j].inPath=false
             updateColor(nodes[i][j])
         }
-    }
+    }*/
+    window.location.reload()
     drawNodes()
 }
 function restrictedDraw() {
