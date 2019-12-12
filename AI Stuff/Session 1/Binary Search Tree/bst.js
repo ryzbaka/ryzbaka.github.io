@@ -51,8 +51,9 @@ class Tree{
     }
 }
 let tree
+let myCanvas
 function setup(){
-    const myCanvas=createCanvas(600,600)
+    myCanvas=createCanvas(600,600)
     myCanvas.position(displayWidth/2-300,displayHeight/2-280)
     myCanvas.background("white")
     tree=new Tree()
@@ -87,6 +88,11 @@ function restrictedDraw(){
         myCanvas.background('red')
         drawNodes()
     }
+    else{
+        myCanvas.background('lightgreen')
+        drawNodes()
+    }
+    console.log(state)
 }
 
 
@@ -116,7 +122,7 @@ function searchDraw(someNode,someValue){
             state=true
         }
         else{
-            someNode.color="lightyellow"
+            someNode.color="yellow"
         }
         if(someNode.left){
             searchDraw(someNode.left,someValue)
