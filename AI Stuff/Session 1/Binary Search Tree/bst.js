@@ -127,10 +127,10 @@ function searchDraw(someNode,someValue){
         else{
             someNode.color="yellow"
         }
-        if(someNode.left){
+        if(someNode.left && someNode.value>someValue){
             searchDraw(someNode.left,someValue)
         }
-        if(someNode.right){
+        if(someNode.right && someNode.value<someValue){
             searchDraw(someNode.right,someValue)
         }
     }
