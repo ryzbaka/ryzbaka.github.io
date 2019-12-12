@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.js"></script>
+    <script src="bst.js"></script>
+</head>
+<body>
+    <div class="main-content">
+        <h1>Binary Search Tree</h1>
+        <input class="search-box" placeholder="value">
+        <div>
+            <button class="search-button">Search!</button>
+            <button class="reset-button">Reset</button>
+        </div>    
+    </div>
+    <script>
+        const searchBox=document.querySelector(".search-box")
+        const searchButton=document.querySelector(".search-button")
+        searchButton.addEventListener('click',()=>{
+            searchVal=parseFloat(searchBox.value)
+            restrictedDraw()
+            searchButton.setAttribute("disabled","true")
+        })
+        const resetButton=document.querySelector(".reset-button")
+        resetButton.addEventListener('click',()=>{
+            window.location.reload()
+        })
+    </script>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        .main-content{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</body>
+</html>
