@@ -56,6 +56,7 @@ function setup(){
     myCanvas=createCanvas(600,600)
     //myCanvas.position(displayWidth/2-300,displayHeight/2-200)
     myCanvas.background("darkgrey")
+    stroke('white')
     tree=new Tree()
     tree.addNode(3)
     tree.addNode(2)
