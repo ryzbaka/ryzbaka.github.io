@@ -54,8 +54,8 @@ let tree
 let myCanvas
 function setup(){
     myCanvas=createCanvas(600,600)
-    myCanvas.position(displayWidth/2-300,displayHeight/2-280)
-    myCanvas.background("white")
+    //myCanvas.position(displayWidth/2-300,displayHeight/2-200)
+    myCanvas.background("darkgrey")
     tree=new Tree()
     tree.addNode(3)
     tree.addNode(2)
@@ -87,10 +87,12 @@ function restrictedDraw(){
     if(!state){
         myCanvas.background('red')
         drawNodes()
+        document.body.style.background="red"
     }
     else{
         myCanvas.background('lightgreen')
         drawNodes()
+        document.body.style.background="lightgreen"
     }
     console.log(state)
 }
