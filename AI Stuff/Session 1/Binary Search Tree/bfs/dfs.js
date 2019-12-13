@@ -2,25 +2,7 @@ const r=40
 const separation=80
 let state=false
 let searchVal=8
-class Queue{
-    constructor(){
-        this.values=[]
-    }
-    enqueue(n){
-        this.values.push(n)
-    }
-    dequeue(){
-        if(this.values.length>0){
-            const dqValue=this.values[0]
-            this.values=this.values.splice(1,)
-            return dqValue
-        }else{
-            console.error('Queue Underflow!')
-            return null
-        }
-    }
-}
-let queue=new Queue()
+let stack=[]
 class Node{
     constructor(n){
         this.value=n
@@ -97,12 +79,12 @@ function setup(){
     tree.addNode(5.6)
     tree.addNode(0.1)
     tree.addNode(0.15)
+    console.log(tree)
     drawNodes()
 }
 function restrictedDraw(){
     state=false
-    queue.enqueue(tree.root)
-    console.log(queue)
+    stack.push(tree.root)
     searchDraw(searchVal)
     drawNodes()
     if(!state){
@@ -115,7 +97,7 @@ function restrictedDraw(){
         drawNodes()
         document.body.style.background="lightgreen"
     }
-    
+    console.log(state)
 }
 
 
@@ -139,20 +121,34 @@ function traverse(someNode){
     }
 }
 function searchDraw(someValue){
+    /*if(!state){
+        if(someNode.value===someValue){
+            someNode.color="green"
+            state=true
+        }
+        else{
+            someNode.color="yellow"
+        }
+        if(someNode.left && someNode.value>someValue){
+            searchDraw(someNode.left,someValue)
+        }
+        if(someNode.right && someNode.value<someValue){
+            searchDraw(someNode.right,someValue)
+        }
+    }*/
     if(!state){
-        while(queue.values.length!=0 && !state){
-            console.log(queue)
-            let currentNode=queue.dequeue()
+        while(stack.length!=0 && !state){
+            let currentNode=stack.pop()
             if(currentNode.value===someValue){
                 currentNode.color="green"
                 state=true
             }else{
                 currentNode.color="yellow"
-                if(currentNode.left){
-                    queue.enqueue(currentNode.left)
-                }
                 if(currentNode.right){
-                    queue.enqueue(currentNode.right)
+                    stack.push(currentNode.right)
+                }
+                if(currentNode.left){
+                    stack.push(currentNode.left)
                 }
             }
         }
