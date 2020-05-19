@@ -27,6 +27,7 @@
       <p class="projects navbar-item">Projects</p>
       <p class="linkedin navbar-item">Linkedin</p>
       <p class="github navbar-item">Github</p>
+      <p class="secret navbar-item">Secret</p>
       <script>
         const linkedinButton = document.querySelector(".linkedin");
         linkedinButton.addEventListener("click", () => {
@@ -42,6 +43,10 @@
         const aboutButton = document.querySelector(".about");
         aboutButton.addEventListener("click", () => {
           window.open("/about");
+        });
+        const secretButton = document.querySelector(".secret");
+        aboutButton.addEventListener("click", () => {
+          window.open("/secret");
         });
         function changeName(someString) {
           const name = document.querySelector(".name");
