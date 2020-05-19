@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="wrong.js"></script>
+  </head>
+  <body>
+    <div class="drawing">
+      <!--script  src="sketch.js"></script-->
+      <h1
+        class="name"
+        onmouseover="changeName('RYZBAKA')"
+        onmouseout="changeName('Hamza Ali Rizvi')"
+      >
+        Hamza Ali Rizvi
+      </h1>
+    </div>
+    <div class="navbar">
+      <p class="about navbar-item">About</p>
+      <p class="projects navbar-item">Projects</p>
+      <p class="linkedin navbar-item">Linkedin</p>
+      <p class="github navbar-item">Github</p>
+      <p class="secret navbar-item">Secret</p>
+      <script>
+        const linkedinButton = document.querySelector(".linkedin");
+        linkedinButton.addEventListener("click", () => {
+          window.open(
+            "https://www.linkedin.com/in/hamza-ali-rizvi-643251148/",
+            "_blank"
+          );
+        });
+        const githubButton = document.querySelector(".github");
+        githubButton.addEventListener("click", () => {
+          window.open("https://github.com/ryzbaka", "_blank");
+        });
+        const aboutButton = document.querySelector(".about");
+        aboutButton.addEventListener("click", () => {
+          window.open("/about");
+        });
+        const secretButton = document.querySelector(".secret");
+        secretButton.addEventListener("click", () => {
+          window.open("/secret");
+        });
+        function changeName(someString) {
+          const name = document.querySelector(".name");
+          name.innerText = someString;
+        }
+      </script>
+    </div>
+  </body>
+</html>
