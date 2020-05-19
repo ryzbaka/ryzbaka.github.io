@@ -1,26 +1,52 @@
-const backgroundDetails={freeze:false}
-let circleSize=50
-function setup() {
-  createCanvas(400,400)
-}
-function mouseReleased(){
-    backgroundDetails.freeze=true
-    circleSize=100
-}
-function draw() {
-  const mappedX=map(mouseX,0,400,0,255)
-  const mappedY=map(mouseY,0,400,0,255)
-  backgroundDetails.r=mappedX
-  backgroundDetails.g=mappedY
-  backgroundDetails.b=mappedX  
-  if(mouseIsPressed){
-    fill(random(0,255),random(0,255),random(0,255),70)
-    stroke('white')
-    ellipse(mouseX,mouseY,circleSize,circleSize)
-    circleSize-=1
+let backCanvas;
+let frontCanvas;
+class Star{
+    constructor(){
+      this.x=random(-displayWidth,displayWidth);
+      this.y=random(-displayHeight,displayHeight);
+      this.z=random(displayWidth);
+    }
+    show(){
+      fill('black');
+      noStroke();
+      
+      const sx=map(this.x/this.z,0,1,0,displayWidth)
+      const sy=map(this.y/this.z,0,1,0,displayHeight)
+      const r=map(this.z,0,width,16,0)
+      ellipse(sx,sy,r,r)
+    }
+    update(){
+      this.z-=20
+      if(this.z<1){
+        this.z=displayWidth
+        this.x=random(-displayWidth,displayWidth);
+        this.y=random(-displayHeight,displayHeight);
+      }
+    }
+    
   }
-  if(!backgroundDetails.freeze){
-  background(mappedX,mappedY,mappedX-mappedY+100)
+  const nStars=1000
+  const stars=[]
+  function setup(){
+    backCanvas=createCanvas(displayWidth,displayHeight)
+    backCanvas.position(0,0)
+    backCanvas.style('z-index','-2')
+    backCanvas.background('red')
+    for(let i=0;i<nStars;i++){
+      const someStar=new Star()
+      stars.push(someStar)
+    }
   }
-  point(random(0,400),random(0,400))
-}
+  function windowResized(){
+      backCanvas.height=displayHeight;
+      backCanvas.width=displayWidth;
+  }
+  function draw(){
+    background('red')
+    translate(displayWidth/2,displayHeight/2)
+    for(let i=0;i<nStars;i++){
+      stars[i].update()
+      stars[i].show()
+    }
+  }
+  
