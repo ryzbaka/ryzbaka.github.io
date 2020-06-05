@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8" />
+  <script src="d3.v5.js"></script>
+  <style>
+    body {
+      margin: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <svg></svg>
+  <!-- empty svg -->
+  <script>
+    const city = "Austin";
+    const width = 800;
+    const height = 300;
+    const margin = { top: 20, bottom: 20, left: 20, right: 20 };
+
+    // dataset of city temperatures across time
+    const temps = [];
+    const dates = [];
+    d3.tsv("data.tsv").then((data) => {
+      //processing data in batches of 100 points or less each
+      data.forEach((element) => {
+        temps.push(element[city]);
+        dates.push(new Date(d3.timeParse("%Y%m%d")(element.date)));// try removing new Date and see what happens
+      });
+    const barWidth=2
+    const svg = d3.select("svg");
+    const yExtent=d3.extent(temps)
+    const yScale=d3.scaleLinear()
+                    .domain(yExtent).range([height,0])
+    const yAxis=d3.axisLeft().scale(yScale)
+    
+    //scaler for time
+    const xExtent=d3.extent(dates)
+    const xScale=d3.scaleTime().domain(xExtent).range([0,temps.length*barWidth])
+    const xAxis=d3.axisBottom().scale(xScale)
+
+    console.log(yScale(67.1))
+    console.log(temps)
+    svg
+                .append('g')
+                .selectAll("rect")
+                .data(temps)
+                .enter()
+                .append("rect")
+                .attr("x",(data,index)=>{
+                    return index*barWidth
+                })
+                .attr("y",(data,index)=>{
+                    return yScale(data)
+                })//when scalin you flip the contents of y attribute and height attribute
+                .attr("height",(data)=>height-yScale(data))
+                .attr("width",barWidth)
+                .attr("fill",(d,i)=>{
+                    return "purple"
+                })
+                .attr("stroke","#fff")
+                .attr("transform","translate(30,5)")
+
+    svg.append('g').attr('transform',"translate(25,5)").call(yAxis)
+    svg.append('g').attr('transform',"translate(30,305)").call(xAxis)
+    });
+    
+    /*
+    temps -> temperatures y-axis
+    dates -> date recorded x-axis
+    */
+  </script>
+</body>
