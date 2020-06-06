@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../basics/d3.v5.js"></script>
+  </head>
+  <body>
+    <svg></svg>
+    <style>
+      body {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+      svg {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <script>
+      const city = "New York";
+      const height = 300;
+      const width = 800;
+      let data = null;
+      let viz = null;
+      let x_axis=null;
+      let y_axis=null;
+      d3.tsv("../basics/data.tsv").then((d) => {
+        data = d;
+        const values = [];
+        const dates = [];
+        data.forEach((element, index) => {
+          element.date = new Date(d3.timeParse("%Y%m%d")(element.date));
+        });
+        console.log(dates);
+        console.log(values);
+        const xExtent = d3.extent(data, (data) => data.date);
+        const yExtent = d3.extent(data, (data) => data[city]);
+        console.log(xExtent);
+        console.log(yExtent);
+
+        const yScale = d3.scaleLinear().domain(yExtent).range([height, 0]);
+        const yAxis = d3.axisLeft().scale(yScale)
+        const xScale = d3.scaleTime().domain(xExtent).range([0, width]);
+        const xAxis = d3.axisBottom().scale(xScale)
+        const svg = d3.select("svg");
+        const line = d3
+          .line()
+          .x((d) => {
+            return xScale(d["date"]);
+          })
+          .y((d) => {
+            return yScale(d[city]);
+          });
+        viz = svg
+          .append("path")
+          .attr("d", line(data))
+          .attr("fill", "none")
+          .attr("stroke-width", 2)
+          .attr("stroke", "blue")
+
+        x_axis=svg.append('g').call(xAxis)
+        y_axis=svg.append('g').call(yAxis)
+          //.attr('transform','translate(200,200)')
+        viz.attr('transform','translate(90,100)')
+        x_axis.attr('transform','translate(90,405)')
+        y_axis.attr('transform','translate(70,100)')
+      });
+      //hey man add some axes
+    </script>
+  </body>
+</html>
