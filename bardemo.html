@@ -19,6 +19,10 @@
 </head>
 
 <body>
+  <h2 class="title">Temperature from October 2011 to September 2012</h2>
+  <button class="au">Austin</button>
+  <button class="ny">New York</button>
+  <button class="sf">San Francisco</button>
   <svg></svg>
   <!-- empty svg -->
   <script>
@@ -28,9 +32,9 @@
     const margin = { top: 20, bottom: 20, left: 20, right: 20 };
 
     // dataset of city temperatures across time
-    const temps = [];
-    const dates = [];
-    d3.tsv("data.tsv").then((data) => {
+    let temps = [];
+    let dates = [];
+function plot(city){ d3.tsv("data.tsv").then((data) => {
       //processing data in batches of 100 points or less each
       data.forEach((element) => {
         temps.push(element[city]);
@@ -38,6 +42,7 @@
       });
     const barWidth=2
     const svg = d3.select("svg");
+    svg.selectAll('*').remove()
     const yExtent=d3.extent(temps)
     const yScale=d3.scaleLinear()
                     .domain(yExtent).range([height,0])
@@ -72,8 +77,18 @@
 
     svg.append('g').attr('transform',"translate(25,5)").call(yAxis)
     svg.append('g').attr('transform',"translate(30,305)").call(xAxis)
+    dates=[]
+    temps=[]
     });
-    
+}   
+    const title=document.querySelector('.title')
+    const buttons= document.querySelectorAll('button')
+    buttons.forEach((el,index)=>{
+        el.addEventListener('click',()=>{
+            plot(el.innerText)
+            title.innerText=el.innerText+"\'s "+title.innerText.slice(-47,)
+        })
+    })
     /*
     temps -> temperatures y-axis
     dates -> date recorded x-axis
