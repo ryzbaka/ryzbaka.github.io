@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shapes Intro</title>
+    <script src="../basics/d3.v5.js"></script>
+  </head>
+  <body>
+    <svg></svg>
+    <style>
+      body { margin:0;
+             position:fixed;
+             top:0;/*set top of element 0 pixels above or below parent element*/
+             right:0;/*set right of element 0 pixels above or below parent element*/
+             bottom:0;/*set right of element 0 pixels above or below parent element*/
+             left:0;/*set bottom of element 0 pixels above or below parent element*/ 
+             }
+      svg {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <script>
+      const pie = d3.pie();//return a function that returns start and end angles given some data
+        //d3.pie can be provided arguments for sorting and fixed start or end angles
+        //the resultant of d3.pie() is a function that maps data points to certain start and end angles
+      // input
+      const data = [10, 50, 2, 3, 5, 8, 13, 21];//data to be plotted
+      const colors = d3.scaleOrdinal(d3.schemeCategory10); //this returns a function. here d3.schemeCategory10 is a color scheme
+      //that acts as the range
+      //colors.domain can set or read the scale's domain.
+      /*
+      When we apply the scale to new data, the scales first checks if it has associated the data to a certain value.
+      If not, it takes a new value from its range, matches it with the incoming data, and returns the value.
+      */
+
+      //console.log(pie(data));
+      // output
+      /*
+      [
+      {"data":  1, "value":  1, "startAngle": 6.050474740247008, "endAngle": 6.166830023713296, "padAngle": 0},
+      {"data":  1, "value":  1, "startAngle": 6.166830023713296, "endAngle": 6.283185307179584, "padAngle": 0},
+      {"data":  2, "value":  2, "startAngle": 5.817764173314431, "endAngle": 6.050474740247008, "padAngle": 0},
+      {"data":  3, "value":  3, "startAngle": 5.468698322915565, "endAngle": 5.817764173314431, "padAngle": 0},
+      {"data":  5, "value":  5, "startAngle": 4.886921905584122, "endAngle": 5.468698322915565, "padAngle": 0},
+      {"data":  8, "value":  8, "startAngle": 3.956079637853813, "endAngle": 4.886921905584122, "padAngle": 0},
+      {"data": 13, "value": 13, "startAngle": 2.443460952792061, "endAngle": 3.956079637853813, "padAngle": 0},
+      {"data": 21, "value": 21, "startAngle": 0.000000000000000, "endAngle": 2.443460952792061, "padAngle": 0}
+      ]*/
+      const slices = pie(data);//slices now contains start and and angles for each 
+      //pie(data) will contain an array of all the start and stop angles of every data point
+      const arc = d3
+        .arc()
+        .innerRadius(0)
+        .outerRadius(150)
+        .startAngle((d) => d.startAngle)
+        .endAngle((d) => d.endAngle); //this returns
+      //a d atribute for a path element to follow
+
+      const svg = d3.select("svg").append("g");//selecting svg and adding a group for the pie chart. A group is like a div
+      svg
+        .selectAll("path") //empty selection since multiple paths will be needed to render each slice
+        .data(slices)//assigning data
+        .enter()
+        .append("path")
+        .attr('d',arc)//arc function is called on all the datapoints
+        .attr('fill',(d,i)=> colors(i))//lines 26 and 27 applying a specific color scheme where domain is a fixed
+        //sized array of indices that is each index in the data array corresponds to a category.
+        //otherwise you can map the colors to certain values in the arrays
+        .attr('stroke',"fff")
+        .attr('transform','translate(200,200)')
+
+    </script>
+  </body>
+</html>
