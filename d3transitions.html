@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../basics/d3.v5.js"></script>
+  </head>
+  <body>
+    <svg></svg>
+    <style>
+      body {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+      }
+      svg {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <script>
+      const colors=d3.scaleOrdinal(d3.schemeCategory10)
+      const barTransition = d3.transition().duration(1000);
+      const svg = d3.select("svg");
+      const height = 300;
+      const width = 800;
+      const rectWidth = 100;
+      const data = [
+        [
+          { key: "newYork", values: 20 },
+          { key: "utah", values: 30 },
+          { key: "austin", values: 20 },
+        ],
+        [
+          { key: "newYork", values: 50 },
+          { key: "utah", values: 30 },
+          { key: "austin", values: 20 },
+        ],
+        [
+          { key: "newYork", values: 50 },
+          { key: "utah", values: 30 },
+          { key: "austin", values: 20 },
+          { key: "LA", values: 100 },
+        ],
+        [
+          { key: "utah", values: 30 },
+          { key: "austin", values: 20 },
+          { key: "LA", values: 100 },
+        ],
+      ];
+      function updateBars(data) {
+        let bars = svg.selectAll("rect").data(data, (d) => d.key);
+
+        bars
+          .exit() // exit selection
+          .transition(barTransition)
+          .attr('y',height)
+          .attr('height',0)
+          .remove(); //remove the bar then
+          //.transition(barTransition)
+          //.attr("y", height) //change the y coordinate to height value and put that in a transition
+          //.attr("height", 0) //update to at that point during the transition
+
+        const enter = bars
+          .enter()
+          .append("rect")
+          .attr('y',height)
+          .attr("width",rectWidth)
+          .attr("stroke", "#fff")
+          //.attr("fill", 'blue')
+        //.attr("y", height);
+        bars = enter
+          .merge(bars)
+          .transition(barTransition)
+          .attr("x", (d, i) => rectWidth * i)
+          .attr("y", (d) => height - d.values)
+          .attr("height", (d) => d.values)
+          .attr('fill',d=>colors(d.key))
+      }
+      let index=0;
+      setInterval(() => {
+          updateBars(data[index%data.length])
+          index+=1
+      }, 2500);
+    </script>
+  </body>
+</html>
