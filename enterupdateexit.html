@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Exit</title>
+    <script src="../basics/d3.v5.js"></script>
+  </head>
+  <body>
+    <svg></svg>
+    <style>
+      body {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+      svg {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <script>
+      const rectWidth = 100;
+      const height = 300;
+      const width = 800;
+      const svg = d3.select("svg");
+      const data=[
+          [
+          {key:'newYork',values:20},
+          {key:'utah',values:30},
+          {key:'austin',values:20},
+          ],
+          [
+          {key:'newYork',values:50},
+          {key:'utah',values:30},
+          {key:'austin',values:20},
+          ],
+          [
+          {key:'newYork',values:50},
+          {key:'utah',values:30},
+          {key:'austin',values:20},
+          {key:'LA',values:100}
+          ],
+          [
+          {key:'utah',values:30},
+          {key:'austin',values:20},
+          {key:'LA',values:100}
+          ]
+      ]
+      function updateBars(data) {
+        let bars = svg.selectAll("rect").data(data, (d) => d.key); //updating enterNodes
+        //here the key function maps the key of the data to the placeholder
+        bars.exit().remove();//removing enter Nodes that are not needed
+
+        const enter = bars // an enter selection to add rectangles for every enterNodes
+          .enter()
+          .append("rect")
+          .attr('width',rectWidth)
+          .attr("fill", "blue")
+          .attr("stroke", "#fff");
+
+        bars = enter//merging update and enter selections to add rectangles for the enterNodes that have changed
+          .merge(bars)
+          .attr("x", (d, i) => i * rectWidth)
+          .attr("y", (d) => height - d.values)
+          .attr("height", (d) => d.values)
+      }
+    </script>
+  </body>
+</html>
