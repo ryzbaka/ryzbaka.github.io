@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Challenge 2</title>
+    <script src="../basics/d3.v5.js"></script>
+  </head>
+  <body>
+    <h2 class="year"></h2>
+    <h3>Barley Yield</h3>
+    <svg></svg>
+    <style>
+      body {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+      }
+      svg {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+    <script>
+      // x-> barley sites
+      // y->yield value
+      //animate across years
+      const height = 300;
+      const width = 800;
+      const rectWidth = 7;
+      const colors = d3.scaleOrdinal(d3.schemeCategory10);
+      const svg = d3.select("svg");
+      /*d3.csv('./barleyfull.csv').then((data)=>{
+         console.log(data[0])
+         updateBars(data[0])
+     })*/
+      let someExtent
+      let someScale=null
+      function updateBars(data,xScaler) {
+        const barTransition = d3.transition().duration(1000);
+        const y_axis=svg.selectAll('g')
+        y_axis.transition(barTransition)
+        //.attr('transform','scale(0.5)')
+        .attr('opacity',0)
+        //.attr('transform','translate(-50,0)')
+        .remove()
+        const yExtent=d3.extent(data,d=>parseFloat(d.yield))
+        console.log(data)
+        const yScale=d3.scaleLinear().domain(yExtent).range([height,0])
+        const yAxis=d3.axisLeft().scale(yScale)
+
+        const xAxis=d3.axisBottom().scale(xScaler)
+        
+        someScale=yScale
+        someExtent=yExtent
+        let bars = svg.selectAll("rect").data(data, (data) => data.index);
+        bars
+          .exit()
+          .transition(barTransition)
+          .attr("y", height)
+          .attr("height", 0);
+        const enter = bars
+          .enter()
+          .append("rect")
+          .attr("width", rectWidth)
+          .attr("stroke", "#fff")
+          .attr("y", height);
+        bars = enter
+          .merge(bars)
+          .attr("transform","translate(47,10)")
+          .attr("x", (d, i) => xScaler(d['site']+' : '+d['gen']))//i * rectWidth)
+          .transition(barTransition)
+          .attr("y", (d) => yScale(parseFloat(d.yield))) //assume coercion
+          .attr("fill", (d) => colors(d.site))
+          .attr("height", (d) =>height- yScale(parseFloat(d.yield)))
+        svg.append('g').call(yAxis).attr('transform','translate(40,10)')
+        svg.append('g').call(xAxis)
+                       .attr('transform','translate(42,320)')
+                       .selectAll("text")
+                       .attr('transform','rotate(-90)')
+                       .attr('text-anchor',"end")
+                       .attr('dx','-2em')
+                       .attr('dy','-0.7em')
+      }
+      const tester = [
+        { index: "1", site: "mau5hau5", yield: "45" },
+        { index: "2", site: "someone", yield: "32" },
+      ];
+      //let someScaler=null
+      function yearWise(data, year) {
+        //console.log(year)
+        //console.log(data)
+        const batch = [];
+        let xValues=[];
+        let rangeIndex=0
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].year === year) {
+                batch.push(data[i]);
+                if(!xValues.includes(data[i]['site']))
+                {
+                    xValues.push(data[i]['site']+' : '+data[i]['gen'])
+                }
+            }
+        }
+        console.log(xValues)
+        const xScaler=d3.scaleBand().domain(xValues).range([0,width])//try rangeRound
+        updateBars(batch,xScaler);
+      }
+      const yearDisplay=document.querySelector('.year')
+      /*const someRange=[]
+      for(let i=0;i<800;i++){
+          someRange.push(i)
+      }*/
+      d3.csv("./barleyfull.csv").then((data) => {
+        let year = 1927;
+        setInterval(() => {
+          const stringYear = year.toString();
+          yearDisplay.innerText=stringYear
+          yearWise(data, stringYear);
+          year += 1;
+          if (year === 1937) {
+            year = 1927;
+          }
+        }, 2500);
+      });
+    </script>
+  </body>
+</html>
