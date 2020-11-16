@@ -27,8 +27,8 @@ function mousePressed(){
 }
 
 function draw(){
-    fill('hotpink');
     const level = map(amplitude.getLevel(),0,1,50,200)
+    fill(255,105,180,map(level,50,200,0,100));
     // ellipse(windowWidth/2,windowHeight/2,level,level)
     xOffset+=xIncrement;
     const xPos = map(noise(xOffset),0,1,0,windowWidth);
