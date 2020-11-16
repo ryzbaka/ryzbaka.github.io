@@ -34,7 +34,9 @@ function draw(){
     xOffset+=xIncrement;
     const xPos = map(noise(xOffset),0,1,0,windowWidth);
     const yPos = map(noise(xOffset,xOffset),0,1,0,windowHeight);
-    ellipse(xPos,yPos,level,level)
+    stroke('white');
+    ellipse(xPos,yPos,level,level);
+    noStroke();
     fill(20,20,20,20)
     rect(0,0,windowWidth,windowHeight)    
 }
