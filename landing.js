@@ -29,14 +29,15 @@ function mousePressed(){
 
 function draw(){
     const level = map(amplitude.getLevel(),0,1,50,200)
+    if(level>100){
+        fill('white')
+        ellipse(random(windowWidth),random(windowHeight),30,30)
+    }
     fill(255,105,180,map(level,50,200,0,100));
-    // ellipse(windowWidth/2,windowHeight/2,level,level)
     xOffset+=xIncrement;
     const xPos = map(noise(xOffset),0,1,0,windowWidth);
     const yPos = map(noise(xOffset,xOffset),0,1,0,windowHeight);
-    stroke('white');
-    ellipse(xPos,yPos,level,level);
-    noStroke();
+    ellipse(xPos,yPos,level,level)
     fill(20,20,20,20)
     rect(0,0,windowWidth,windowHeight)    
 }
