@@ -15,6 +15,7 @@ function setup(){
 
 function mousePressed(){
     if(song.isPlaying()){
+        amplitude = new p5.Amplitude();
         song.stop();
         fill('red')
         ellipse(mouseX,mouseY,30,30)
