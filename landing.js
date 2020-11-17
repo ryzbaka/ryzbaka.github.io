@@ -2,7 +2,7 @@ let backgroundSketch;
 let amplitude;
 let song;
 let xOffset = 0;
-let xIncrement = 0.01;
+let xIncrement = 0.001;
 function preload(){
     song = loadSound("audio.mp3")
 }
