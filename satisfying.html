@@ -36,10 +36,30 @@
 </a>
 		</div>
 		<script>
-			const audio = new Audio("clickSound.wav");
-			const button = document.querySelector('.button-container');
-			button.addEventListener('mousedown',()=>audio.play())
-		</script>
+                        let count=0;
+                        const audio = new Audio("clickSound.wav");
+                        const button = document.querySelector('.button-container');
+                        const message = document.querySelector('.message');
+                        button.addEventListener('mousedown',()=>{
+				audio.play();
+				count+=1;
+				if(count===3){
+					message.innerText="I said don't click the button";
+				}
+				else if(count===10){
+					message.innerText="You don't listen do you.";
+				}
+				else if(count===50){
+					message.innerText="Don't you have something better to do?"
+				}
+				else if(count===100){
+					message.innerText="Alright, I won't stop you. Click away."
+				}
+				else{
+					message.innerText=count;
+				}
+			});
+                </script>
 
 <style>
 .click-button {
