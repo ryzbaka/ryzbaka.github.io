@@ -1,0 +1,74 @@
+<html>
+	<title>Pixel UI</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.min.js"></script>
+	<body>
+		<div class='buttons-container'>
+		<a class="button-container">
+		<svg class="click-button clicked" xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 30 10" shape-rendering="crispEdges">
+<metadata>Made with Pixels to Svg https://codepen.io/shshaw/pen/XbxvNj</metadata>
+<path stroke="#000000" d="M1 0h1M3 0h2M6 0h5M13 0h8M23 0h1M25 0h3M0 1h1M29 1h1M0 2h1M3 2h2M7 2h1M12 2h2M15 2h2M19 2h2M24 2h1M29 2h1M2 3h1M5 3h1M7 3h1M14 3h1M18 3h1M21 3h1M24 3h1M26 3h1M29 3h1M0 4h1M18 4h1M25 4h1M29 4h1M7 5h1M14 5h1M18 5h1M24 5h1M29 5h1M5 6h1M7 6h1M14 6h1M18 6h1M21 6h1M24 6h1M26 6h1M0 7h1M2 7h2M5 7h1M7 7h4M13 7h4M18 7h2M21 7h1M24 7h1M27 7h1M29 7h1M29 8h1M1 9h2M7 9h1M9 9h8M19 9h8M28 9h1" />
+<path stroke="#010000" d="M2 0h1M5 0h1M11 0h2M21 0h2M24 0h1M28 0h1M14 2h1M27 2h1M0 3h1M2 4h1M7 4h1M14 4h1M24 4h1M0 5h1M2 5h1M25 5h1M0 6h1M2 6h1M29 6h1M4 7h1M12 7h1M20 7h1M0 8h1M3 9h4M8 9h1M17 9h2M27 9h1" />
+<path stroke="#ffffff" d="M1 1h1M3 1h10M14 1h1M19 1h6M26 1h2M2 2h1M6 2h1M8 2h4M17 2h2M21 2h1M23 2h1M25 2h1M1 3h1M3 3h2M6 3h1M10 3h2M13 3h1M19 3h2M22 3h2M28 3h1M3 4h1M5 4h2M8 4h4M13 4h1M16 4h1M19 4h3M23 4h1M26 4h2M3 5h2M6 5h1M8 5h6M15 5h1M17 5h1M19 5h5M27 5h2M1 6h1M3 6h2M6 6h1M8 6h1M10 6h1M12 6h2M15 6h1M19 6h2M22 6h2M27 6h2M11 7h1M22 7h1M25 7h2M28 7h1M1 8h7M12 8h3M17 8h5M25 8h4" />
+<path stroke="#feffff" d="M2 1h1M13 1h1M15 1h4M25 1h1M28 1h1M1 2h1M5 2h1M22 2h1M26 2h1M28 2h1M8 3h2M12 3h1M15 3h3M25 3h1M27 3h1M1 4h1M4 4h1M12 4h1M15 4h1M17 4h1M22 4h1M28 4h1M1 5h1M5 5h1M16 5h1M26 5h1M9 6h1M11 6h1M16 6h2M25 6h1M1 7h1M6 7h1M17 7h1M23 7h1M8 8h4M15 8h2M22 8h3" />
+</svg>
+<svg class="click-button unclicked" xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 30 10" shape-rendering="crispEdges">
+<metadata>Made with Pixels to Svg https://codepen.io/shshaw/pen/XbxvNj</metadata>
+<path stroke="#000000" d="M1 0h1M3 0h5M9 0h7M17 0h2M20 0h4M25 0h1M0 1h1M29 1h1M0 2h1M4 2h1M7 2h1M12 2h1M14 2h3M24 2h1M27 2h1M29 2h1M0 3h1M2 3h1M5 3h1M7 3h1M14 3h1M18 3h1M21 3h1M24 3h1M26 3h1M29 3h1M0 4h1M7 4h1M14 4h1M18 4h1M24 4h1M0 5h1M2 5h1M7 5h1M14 5h1M24 5h2M29 5h1M2 6h1M5 6h1M18 6h1M21 6h1M26 6h1M29 6h1M0 7h1M3 7h1M5 7h1M7 7h4M12 7h2M18 7h2M21 7h1M24 7h1M27 7h1M29 7h1M0 8h1M29 8h1M1 9h1M5 9h1M7 9h4M12 9h5M18 9h11" />
+<path stroke="#010000" d="M2 0h1M8 0h1M16 0h1M19 0h1M24 0h1M26 0h3M3 2h1M13 2h1M19 2h2M2 4h1M25 4h1M29 4h1M18 5h1M0 6h1M7 6h1M14 6h1M24 6h1M2 7h1M4 7h1M14 7h3M20 7h1M2 9h3M6 9h1M11 9h1M17 9h1" />
+<path stroke="#cbdbfc" d="M1 1h2M4 1h2M8 1h1M11 1h3M15 1h2M19 1h1M21 1h2M24 1h1M27 1h2" />
+<path stroke="#cadbfc" d="M3 1h1M6 1h2M9 1h2M14 1h1M17 1h2M20 1h1M23 1h1M25 1h2" />
+<path stroke="#bbcae8" d="M1 2h2M5 2h1M8 2h1M10 2h2M17 2h2M21 2h1M23 2h1M25 2h1M28 2h1" />
+<path stroke="#bacae8" d="M6 2h1M9 2h1M22 2h1M26 2h1" />
+<path stroke="#abb9d5" d="M1 3h1M3 3h1M6 3h1M9 3h2M12 3h2M27 3h2" />
+<path stroke="#aab9d5" d="M4 3h1M8 3h1M11 3h1M15 3h3M19 3h2M22 3h2M25 3h1" />
+<path stroke="#9da8c1" d="M1 4h1M10 4h3M17 4h1M28 4h1" />
+<path stroke="#9ca8c1" d="M3 4h4M8 4h2M13 4h1M15 4h2M19 4h5M26 4h2" />
+<path stroke="#8c97ae" d="M1 5h1M3 5h4M8 5h4M13 5h1M15 5h3M19 5h2M23 5h1M26 5h2" />
+<path stroke="#8d97ae" d="M12 5h1M21 5h2M28 5h1" />
+<path stroke="#7c869b" d="M1 6h1M3 6h2M6 6h1M8 6h1M10 6h1M12 6h2M15 6h1M17 6h1M19 6h1M25 6h1M28 6h1" />
+<path stroke="#7d869b" d="M9 6h1M11 6h1M16 6h1M20 6h1M22 6h2M27 6h1" />
+<path stroke="#6d7587" d="M1 7h1M6 7h1M11 7h1M17 7h1M23 7h1M25 7h1M28 7h1" />
+<path stroke="#6c7587" d="M22 7h1M26 7h1" />
+<path stroke="#5d6574" d="M1 8h4M7 8h3M13 8h3M17 8h1M20 8h8" />
+<path stroke="#5c6574" d="M5 8h2M10 8h3M16 8h1M18 8h2M28 8h1" />
+</svg>
+</a>
+		</div>
+		<script>
+			const audio = new Audio("clickSound.wav");
+			const button = document.querySelector('.button-container');
+			button.addEventListener('click',()=>audio.play())
+		</script>
+
+<style>
+.click-button {
+	/*height:100px;*/
+	height:50%;
+	width:50%;
+}
+.unclicked{
+	display:none;
+}
+.button-container:active .clicked{
+	display:none;
+}
+.button-container:active .unclicked{
+	display:block;
+}
+.buttons-container{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	height:100%;
+}
+.button-container{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+
+</style>
+
+	</body>
+</html>
