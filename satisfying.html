@@ -1,10 +1,12 @@
 <html>
-	<title>Satifying Button</title>
+	<title>Pixel UI</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.min.js"></script>
 	<body>
+		
 		<div class='buttons-container'>
-		<a class="button-container">
+			<h1 class="message">Don't click the button.</h1>
+			<a class="button-container">
 		<svg class="click-button clicked" xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 30 10" shape-rendering="crispEdges">
 <metadata>Made with Pixels to Svg https://codepen.io/shshaw/pen/XbxvNj</metadata>
 <path stroke="#000000" d="M1 0h1M3 0h2M6 0h5M13 0h8M23 0h1M25 0h3M0 1h1M29 1h1M0 2h1M3 2h2M7 2h1M12 2h2M15 2h2M19 2h2M24 2h1M29 2h1M2 3h1M5 3h1M7 3h1M14 3h1M18 3h1M21 3h1M24 3h1M26 3h1M29 3h1M0 4h1M18 4h1M25 4h1M29 4h1M7 5h1M14 5h1M18 5h1M24 5h1M29 5h1M5 6h1M7 6h1M14 6h1M18 6h1M21 6h1M24 6h1M26 6h1M0 7h1M2 7h2M5 7h1M7 7h4M13 7h4M18 7h2M21 7h1M24 7h1M27 7h1M29 7h1M29 8h1M1 9h2M7 9h1M9 9h8M19 9h8M28 9h1" />
@@ -34,38 +36,14 @@
 <path stroke="#5c6574" d="M5 8h2M10 8h3M16 8h1M18 8h2M28 8h1" />
 </svg>
 </a>
-		</div>
-		<script>
-                        let count=0;
-                        const audio = new Audio("clickSound.wav");
-                        const button = document.querySelector('.button-container');
-                        const message = document.querySelector('.message');
-                        button.addEventListener('mousedown',()=>{
-				audio.play();
-				count+=1;
-				if(count===3){
-					message.innerText="I said don't click the button";
-				}
-				else if(count===10){
-					message.innerText="You don't listen do you.";
-				}
-				else if(count===50){
-					message.innerText="Don't you have something better to do?"
-				}
-				else if(count===100){
-					message.innerText="Alright, I won't stop you. Click away."
-				}
-				else{
-					message.innerText=count;
-				}
-			});
-                </script>
-
+</div>
+<script src="satisfyingScript.js"></script>
+<script src="satisfyingSketch.js"></script>
 <style>
 .click-button {
 	/*height:100px;*/
-	height:50%;
-	width:50%;
+	height:100%;
+	width:100%;
 }
 .unclicked{
 	display:none;
@@ -81,13 +59,17 @@
 	justify-content:center;
 	align-items:center;
 	height:100%;
+	flex-direction:column;
 }
 .button-container{
 	display:flex;
 	align-items:center;
 	justify-content:center;
+	flex-direction:column;
 }
-
+h1{
+	font-family:sans-serif;
+}
 </style>
 
 	</body>
