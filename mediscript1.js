@@ -1,7 +1,7 @@
 Rive({
     locateFile: (file) => 'https://unpkg.com/rive-canvas@0.7.1/' + file,
   }).then((rive) => {
-    const req = new Request('/animations/space_camp.riv');
+    const req = new Request('/space_camp.riv');
     fetch(req).then((res) => {
     return res.arrayBuffer();
     }).then((buf) => {
