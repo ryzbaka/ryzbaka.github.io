@@ -22,7 +22,7 @@ function draw() {
   // resizeCanvas(windowWidth,windowHeight);
   fill(color(255,0,0,10))
   noStroke();
-  // rect(0,0,windowWidth,windowHeight)
+  rect(0,0,windowWidth,windowHeight)
   flock.run();
 }
 
