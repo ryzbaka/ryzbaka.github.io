@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo</title>
+</head>
+<body>
+    <h1>ToDo</h1>
+    <div>
+        <input id="username" placeholder="username">
+        <input id="passphrase" placeholder="password">
+        <button id="signup-btn">sign up</button>
+        <button id="signin-btn">sign in</button>
+    </div>
+    <div>
+        <input id="say">
+        <button id="speak-btn">speak</button>
+    </div>
+    <ul id="log"></ul>
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+    <script>
+            const gun = Gun(['https://mvp-gun.herokuapp.com/gun']);
+            gun.on("auth",()=>{
+                console.log("authenticated")
+                user.get("said").map().once((say,id)=>{
+                    // console.log(`Say: ${say} ; id: ${id}`)
+                    const ul = document.querySelector("#log");
+                    const item = document.createElement("li")
+                    item.innerText = say;
+                    ul.appendChild(item)
+                })
+            })
+            const user = gun.user();
+            const signupbtn = document.querySelector('#signup-btn');
+            const signinbtn = document.querySelector("#signin-btn");
+            signupbtn.addEventListener("click",()=>{
+                const username = document.querySelector("#username").value;
+                const passphrase = document.querySelector("#passphrase").value; 
+                user.create(username,passphrase);
+            })
+            signinbtn.addEventListener("click",()=>{
+                const username = document.querySelector("#username").value;
+                const passphrase = document.querySelector("#passphrase").value;
+                user.auth(username,passphrase);
+            })
+            const speakbtn = document.querySelector("#speak-btn");
+            speakbtn.addEventListener("click",()=>{
+                if(!user.is){
+                    return
+                }
+                console.log("clicked")
+                user.get("said").set(document.querySelector("#say").value);
+            })
+    </script>
+</body>
+</html>
