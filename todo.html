@@ -4,56 +4,80 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDo</title>
-</head>
-<body>
-    <h1>ToDo</h1>
-    <div>
-        <input id="username" placeholder="username">
-        <input id="passphrase" placeholder="password">
-        <button id="signup-btn">sign up</button>
-        <button id="signin-btn">sign in</button>
-    </div>
-    <div>
-        <input id="say">
-        <button id="speak-btn">speak</button>
-    </div>
-    <ul id="log"></ul>
+    <title>ToDo DApp</title>
+    <script src="https://cdn.jsdelivr.net/npm/gun/examples/jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+    <!-- script src="https://cdn.jsdelivr.net/npm/gun/lib/webrtc.js"></script -->
+</head>
+<body>
+   <h1>P2P To Do Application</h1>
+   <form>
+        <input id="alias" placeholder="username">
+        <input id="pass" type="password" placeholder="passphrase">
+        <input id="in" type="button" value="sign in">
+        <input id="up" type="button" value="sign up">
+    </form> 
+   <ul id="tasks">
+   </ul>
+   <form>
+       <input id="say">
+       <input id="speak" type="button" value="add task">
+   </form>
+
     <script>
-            const gun = Gun(['https://mvp-gun.herokuapp.com/gun']);
-            gun.on("auth",()=>{
-                console.log("authenticated")
-                user.get("said").map().once((say,id)=>{
-                    // console.log(`Say: ${say} ; id: ${id}`)
-                    const ul = document.querySelector("#log");
-                    const item = document.createElement("li")
-                    item.innerText = say;
-                    ul.appendChild(item)
-                })
-            })
-            const user = gun.user();
-            const signupbtn = document.querySelector('#signup-btn');
-            const signinbtn = document.querySelector("#signin-btn");
-            signupbtn.addEventListener("click",()=>{
-                const username = document.querySelector("#username").value;
-                const passphrase = document.querySelector("#passphrase").value; 
-                user.create(username,passphrase);
-            })
-            signinbtn.addEventListener("click",()=>{
-                const username = document.querySelector("#username").value;
-                const passphrase = document.querySelector("#passphrase").value;
-                user.auth(username,passphrase);
-            })
-            const speakbtn = document.querySelector("#speak-btn");
-            speakbtn.addEventListener("click",()=>{
-                if(!user.is){
-                    return
+        //DApp Script goes here.
+        //Initializing GUN to connect with other peers in the network.
+        //Using two peers - 1) Local Gun Peer 2) Public Signalling Server
+        //Browsers don't allow P2P connections directly since firewalls prevent direct connections to machines unless they have a publicly accessible IP address.
+        //The public GUN signalling server coordinates P2P connections.
+        const gun = Gun([
+            // 'http://localhost:8675/gun', //local GUN peer server
+            // 'https://gun-manhattan.herokuapp.com/gun' //public GUN signalling server
+        ]);
+
+        const user = gun.user();
+        const signUpButton = document.querySelector("#up");
+        const signInButton = document.querySelector("#in");
+        const usernameBox = document.querySelector("#alias")
+        const passwordBox = document.querySelector("#pass")
+        const taskBox = document.querySelector("#say")
+        const speakButton = document.querySelector("#speak")
+
+        signUpButton.addEventListener("click",()=>{
+            user.create(usernameBox.value, passwordBox.value,()=>alert("signed up!"));
+        })
+        signInButton.addEventListener("click",()=>{
+            user.auth(usernameBox.value, passwordBox.value,({err})=>{
+                if(err){
+                    alert(err)
                 }
-                console.log("clicked")
-                user.get("said").set(document.querySelector("#say").value);
+                usernameBox.value = "";
+                passwordBox.value = "";
+            });
+        })
+
+        speakButton.addEventListener("click",()=>{
+            if(!user.is){
+                //User not logged in.
+                alert("Log in!")
+                return;
+            }
+            user.get("said").set(taskBox.value);
+            taskBox.value = "";
+        })
+
+        gun.on("auth",()=>{
+            // signInButton.diisabled = true;
+            const taskList = document.querySelector("#tasks");
+            taskList.replaceChildren();
+            user.get("said").map().once((data,id)=>{
+                const listElement = document.createElement("li");
+                listElement.innerText = data;
+                const taskList = document.querySelector("#tasks");
+                taskList.appendChild(listElement);
             })
+        })
     </script>
 </body>
 </html>
