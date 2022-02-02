@@ -5,24 +5,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://chr15m.github.io/bugout/bugout.min.js"></script>
-  <title>Server</title>
+  <title>Client</title>
 </head>
 <body>
-  <h1>Bugout Server</h1>
-  <h2 id="server-address"></h2>
-  <ul>
-
-  </ul>
+  <h1>Bugout Client</h1>
+  <h2 id="status-message">Not connected to server</h2>
   <script>
-    const serverAddressText = document.querySelector("#server-address");
-    const b = new Bugout();
-    console.log(b.address())
-    serverAddressText.innerText = `Bugout server address :${b.address()}`;
-    b.register("ping-server", function(address, args, callback) {
-      console.log(args.message)
-      args.message = "Hello from server: " + b.address();
-      callback(args);
+    const key = prompt("Enter server key")
+    const statusMessage = document.querySelector("#status-message");
+    var b = new Bugout(key);
+    b.on("server", function(address) {
+    statusMessage.innerText = `Connected to server with address ${key}`
+    console.log("connected to server")
+      b.rpc("ping-server", {"message": `Hello from client: ${b.address()}`}, function(result) {
+      console.log(result.message);
     });
+  });
   </script>
 </body>
 </html>
