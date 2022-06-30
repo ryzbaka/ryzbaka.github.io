@@ -6,9 +6,12 @@ let saveButton, clearButton, mouseButton, keyboardButton;
 let slider;
 
 function setup() { 
-  createCanvas(windowWidth, windowHeight);
+  backgroundSketch = createCanvas(windowWidth,windowHeight);
+  backgroundSketch.position(0,0)
+  backgroundSketch.style('z-index',-1);
+//   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
-  background(0);
+  backgroundSketch.background(0);
   stroke("hotpink");
   strokeWeight(50);
 //   // Creating the save button for the file
