@@ -66,7 +66,7 @@ function draw() {
         // let sw = sizeSlider.value();
         strokeWeight(20);
         line(mx, my, pmx, pmy);
-        fill("white")
+        fill("darkgrey")
         strokeWeight(5)
         stroke("black")
         ellipse(mx,my,50,50)
