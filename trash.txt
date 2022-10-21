@@ -1,0 +1,52 @@
+Business Results
+
+Started working as part of the ATRS Post Trade Tools team on the 18th of July of this year, where I spent the initial couple of weeks undergoing knowledge transfer and lab training sessions to understand tools that are currently being supported and worked on by the team as well as the various frameworks, libraries and the programming standards and practices associated with developing software in the Athena ecosystem.
+
+I have since worked on and delivered the following objectives:
+
+	1. Added functionality to the split graphs on the Intraday Feed Pipeline monitor to split graphs by feed types: 
+		a. Added the functionality to feed intraday data by feed/jurisdiction type for any LOB to Report Service by modifying the existing data manipulation workflow to not aggregate data associated with intraday jobs that were blocked or missed their SLA without affecting existing functionality for LOBs that have not opted to use the functionality for their intraday feed pipeline monitors. I was able to achieve this functionality without the overhead of  affecting the current process of data storage implemented for various data sources associated with the intraday feeds and completed the objective 10 days before the estimated deadline. 
+			i. Associated JIRA ticket(s):
+				1) ATRS-58863
+				2) ATRS-58870
+				3) ATRS-58865
+		b. UI code changes had to be made to accommodate the changes made to the Report Service API.  Previously, heatmaps on the feed pipeline monitor would be rendered under dropdowns for every graph rendered. Due to the implementation of the aforementioned changes to Report Service, this would result in multiple graphs being followed by empty heatmaps corresponding to each feed being displayed on the intraday feed pipeline monitor. Changes had to made to the React  code to remove the unnecessary rendering of empty heatmaps and dropdowns when not required by implementing conditions that actively check for heatmap data so that it can be rendered only when required. I was able to make the necessary UI code changes to accommodate the newly implemented report service functionality without affecting the ways intraday feed pipeline monitor graphs are rendered for LOBs that have not opted in to the functionality to split graphs by feed type and completed the task 8 days before the estimated deadline.
+			i. Associated JIRA ticket(s):
+				1) ATRS-58871
+		c. Added functionality to filter the type of data being displayed on the intraday feed pipeline monitor based on the type of environment (UAT, PROD, etc).
+			i. Associated JIRA ticket(s):
+				1) ATRS-62993
+		d. Added automated testing for the feature added to the Intraday endpoint in the Report Service API.
+			i. Associated JIRA ticket(s):
+				1) ATRS-62808
+	2. Porting UI changes from Gaia to AWS
+		a. As part of the migration of tools from Gaiacloud to AWS I, ported UI changes from the Gaia version of the Athena-Posttrade-Web website to the AWS version, this included:
+			i. Porting the Credit Derivatives tab's implementation from the gaia version of the code base to the AWS version
+			ii. Porting UI code changes as described in point 1.b. to the AWS version of the Athena Posttrade Web codebase.
+		b. Associated JIRA ticket(s):
+			i. ATRS-62552
+			ii. ATRS-62220
+
+
+Client/Customer Focus
+
+I interacted and actively engaged with other teams in the firm that use the tools developed by our team regularly to make sure that the tools are being used as part of their workflow in the most effective way so as to increase their productivity . Working towards this objective involved resolving queries and issues raised by the users from other teams that are using our team's tools on a daily basis. The tools I supported are:
+	1) Feed Monitor
+	2) Feed Pipeline Monitor
+	3) Athena Reporting Tool   
+
+This also includes instances where a team has requested the addition of functionality to an existing tool.
+
+I worked on the enhancement requests made by the Credit Derivatives for the Feed Pipeline Monitor tool:
+	- The Credit Derivatives team felt that rendering one consolidated graph irrespective of feeds configured on feed pipeline monitor was not intuitive and made it difficult for users to see which feed issues had blocking or missing SLA issues. They proposed the rendering of graphs split by the feeds configured.
+
+I participated in calls with the team that helped us better understand their requirements and decided on the estimated timeline for the implementation of the same.
+
+The feature was implemented as described in point 1 of the Business Results section.
+
+Teamwork and Leadership
+
+	- Collaborated with various teams whenever required to solve issues.
+	- Worked with peers within my team to collectively design solutions and resolve support issues.
+	- Participated in meetings with my manager and other team members regularly to assess and prioritize tasks.
+	- Joined the NextGen Business Resource Group
