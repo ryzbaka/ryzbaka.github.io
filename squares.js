@@ -34,9 +34,10 @@ class Dot {
 let dots = [];
 
 function setup() {
-  createCanvas(windowWidth,windowHeight);
+//   createCanvas(windowWidth,windowHeight);
+  backgroundSketch = createCanvas(windowWidth,windowHeight);
   dots.push(new Dot());
-  background(0);
+  backgroundSketch.background(0);
 }
 
 function draw() {
