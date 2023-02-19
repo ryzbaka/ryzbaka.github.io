@@ -37,6 +37,8 @@ function setup() {
 //   createCanvas(windowWidth,windowHeight);
   backgroundSketch = createCanvas(windowWidth,windowHeight);
   dots.push(new Dot());
+  backgroundSketch.position(0,0)
+  backgroundSketch.style('z-index',-1);
   backgroundSketch.background(0);
 }
 
